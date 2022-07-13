@@ -11,7 +11,7 @@ public class User {
     private String password;
     private boolean register;
 
-    public void User() {
+    public User() {
 
     }
 
