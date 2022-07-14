@@ -2,38 +2,20 @@ package repository.inmemory;
 
 import exception.ElementAlreadyExistException;
 import exception.ElementNotExistException;
-import exception.NotSuchElementException;
 import model.User;
+import repository.Repository;
 
+import javax.inject.Singleton;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class InMemoryUserRepository implements UserRepository {
+@Singleton
+public class InMemoryUserRepository implements Repository<Integer, User> {
 
-    private static volatile InMemoryUserRepository instance;
-
-    private final AtomicLong count = new AtomicLong();
-    private final Map<Long, User> users = new ConcurrentHashMap<>();
-
-    private InMemoryUserRepository() {
-
-    }
-
-    public static InMemoryUserRepository getInstance() {
-        InMemoryUserRepository inMemoryUser = instance;
-        if (inMemoryUser == null) {
-            synchronized (InMemoryUserRepository.class) {
-                inMemoryUser = instance;
-                if (inMemoryUser == null) {
-                    inMemoryUser = new InMemoryUserRepository();
-                    instance = inMemoryUser;
-                }
-            }
-        }
-        return instance;
-    }
+    private final AtomicInteger count = new AtomicInteger();
+    private final Map<Integer, User> users = new ConcurrentHashMap<>();
 
     @Override
     public void save(User user) {
@@ -48,7 +30,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User get(Long id) {
+    public User get(Integer id) {
         User user = users.get(id);
         if (user == null) {
             throw new ElementNotExistException("Not find User wish id " + id);

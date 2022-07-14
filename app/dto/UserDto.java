@@ -9,6 +9,10 @@ public class UserDto {
     private String email;
     private boolean register;
 
+    public UserDto() {
+
+    }
+
     public UserDto(String firstName, String lastName, String email, boolean register) {
         this.firstName = firstName;
         this.lastName = lastName;
