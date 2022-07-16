@@ -7,17 +7,17 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
-    private boolean register;
+    private String  password;
 
     public UserDto() {
 
     }
 
-    public UserDto(String firstName, String lastName, String email, boolean register) {
+    public UserDto(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.register = register;
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -44,12 +44,12 @@ public class UserDto {
         this.email = email;
     }
 
-    public boolean isRegister() {
-        return register;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRegister(boolean register) {
-        this.register = register;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -57,12 +57,12 @@ public class UserDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDto userDto = (UserDto) o;
-        return register == userDto.register && Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email);
+        return Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email) && Objects.equals(password, userDto.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, register);
+        return Objects.hash(firstName, lastName, email, password);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class UserDto {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", register=" + register +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
