@@ -8,5 +8,10 @@ lazy val root = (project in file("."))
     name := """SKIFTest""",
     libraryDependencies ++= Seq(
       guice
-    )
+    ),
+    libraryDependencies ++= Seq(
+      javaJdbc
+    ),
+    libraryDependencies += guice,
+    routesGenerator := InjectedRoutesGenerator
   )
